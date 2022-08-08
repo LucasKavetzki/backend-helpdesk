@@ -31,18 +31,14 @@ public class DBService {
 
 		Tecnico tec1 = new Tecnico(null, "Lucas Kavetzki","43994373085", "lucaskavetzki@outlook.com","1234");
 		tec1.addPerfil(Perfil.ADMIN);
-		
+
 		Tecnico tec2 = new Tecnico(null, "Fernanda Devs","78913771039", "ferdevs@outlook.com","12345");
-		tec2.addPerfil(Perfil.ADMIN);
 
 		Tecnico tec3 = new Tecnico(null, "Pedro Silveira","00611553066", "pesilva@me.com","123456");
-		tec3.addPerfil(Perfil.ADMIN);
 
 		Tecnico tec4 = new Tecnico(null, "Nicole Tarstuk","32637041099", "tasturk@gmail.com","1234567");
-		tec4.addPerfil(Perfil.ADMIN);
 
 		Tecnico tec5 = new Tecnico(null, "David Pentreski","07221133077", "davistraski@outlook.com","12345678");
-		tec5.addPerfil(Perfil.ADMIN);
 
 		
 		Cliente cli1 = new Cliente(null, "Durval Silva", "80855016000","durvasilva_78@gmail.com", "123");

@@ -54,6 +54,15 @@ public class TecnicoService {
 				return repo.save(oldObj);
 			}
 			
+			//DELETA UM TECNICO
+			public void delete(Integer id) {
+				Tecnico obj = findById(id);
+				if(obj.getChamados().size() > 0) {
+					throw new DataIntegrityViolationException("Técnico possui ordens de serviço e não pode ser excluido!");
+				}
+				 repo.deleteById(id);
+			}
+
 
 	//VALIDAR POR CPF
 	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
@@ -72,4 +81,5 @@ public class TecnicoService {
 		
 	
 }
-}
+
+	}

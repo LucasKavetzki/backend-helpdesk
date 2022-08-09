@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lucas.helpdesk.domain.Tecnico;
+import com.lucas.helpdesk.domain.dto.TecnicoDTO;
 import com.lucas.helpdesk.repositories.TecnicoRepository;
 import com.lucas.helpdesk.service.exptions.ObjectnotFouldException;
 
@@ -25,6 +26,13 @@ public class TecnicoService {
 
 	public List<Tecnico> findAll(){
 		return repo.findAll();
+	}
+
+	public Tecnico create(TecnicoDTO objDTO) {
+		objDTO.setId(null);
+		Tecnico newObj = new Tecnico(objDTO);
+		return repo.save(newObj);
+	
 	}
 
 	

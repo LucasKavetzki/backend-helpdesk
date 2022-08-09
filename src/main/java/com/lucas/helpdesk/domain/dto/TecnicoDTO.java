@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucas.helpdesk.domain.Pessoa;
 import com.lucas.helpdesk.domain.Tecnico;
@@ -16,9 +18,17 @@ public class TecnicoDTO  extends Pessoa {
 	
 	
 	protected Integer id;
+	
+	@NotNull(message= "O campo NOME é Requerido")
 	protected String nome;
+	
+	@NotNull(message= "O campo CPF é Requerido")
 	protected String cpf;
+	
+	@NotNull(message= "O campo EMAIL é Requerido")
 	protected String email;
+	
+	@NotNull(message= "O campo SENHA é Requerido")
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
 	

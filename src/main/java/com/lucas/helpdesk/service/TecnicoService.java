@@ -3,6 +3,8 @@ package com.lucas.helpdesk.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,17 @@ public class TecnicoService {
 		return repo.save(newObj);
 	
 	}
+	
+	
+	// IMPLEMENTAÇÃO PUT, ATUALIZA AS INFORMAÇÕES
+			public Tecnico update(Integer id,  @Valid TecnicoDTO objDTO){
+				objDTO.setId(id);
+				Tecnico oldObj = findById(id);
+				validaPorCpfEEmail(objDTO);
+				oldObj = new Tecnico(objDTO);
+				return repo.save(oldObj);
+			}
+			
 
 	//VALIDAR POR CPF
 	private void validaPorCpfEEmail(TecnicoDTO objDTO) {
@@ -55,6 +68,8 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("E-mail já cadastrado!");
 	}
 
+		
+		
 	
 }
 }

@@ -1,10 +1,14 @@
 package com.lucas.helpdesk.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.lucas.helpdesk.domain.Chamado;
 import com.lucas.helpdesk.domain.Cliente;
@@ -14,6 +18,8 @@ import com.lucas.helpdesk.domain.enums.Prioridade;
 import com.lucas.helpdesk.domain.enums.Status;
 import com.lucas.helpdesk.repositories.ChamadoRepository;
 import com.lucas.helpdesk.service.exptions.ObjectnotFouldException;
+
+
 @Service
 public class ChamadoService {
 
@@ -23,6 +29,8 @@ public class ChamadoService {
 	private TecnicoService tecServer;
 	@Autowired
 	private ClienteService cliServer;
+	
+	
 	
 	public Chamado findById(Integer id) {
 		Optional<Chamado> obj = repo.findById(id);
@@ -38,6 +46,18 @@ public class ChamadoService {
 		return repo.save(newChamado(objDTO));
 	
 	}
+	
+
+	public Chamado update( Integer id, @Valid ChamadoDTO objDTO) {
+		objDTO.setId(id);
+		Chamado oldObj = findById(id);
+		oldObj = newChamado(objDTO);
+		return repo.save(oldObj);
+	}
+	
+	
+	
+	
 	//RECEBE UM CHAMADO
 	private Chamado newChamado(ChamadoDTO obj){
 		Tecnico tecnico = tecServer.findById(obj.getTecnico());
@@ -45,7 +65,12 @@ public class ChamadoService {
 		
 		// CONSTROI UM NOVO CHAMADO
 		Chamado chamado = new Chamado();
-		if(obj.getId() !=null) {
+		if(obj.getId() != null) {
+			chamado.setId(obj.getId());
+			
+		}
+		if(obj.getStatus().equals(2)) {
+			chamado.setDataFechamento(LocalDate.now());
 			
 		}
 		chamado.setTecnico(tecnico);
@@ -56,6 +81,13 @@ public class ChamadoService {
 		chamado.setObservacoes(obj.getObservacoes());
 		
 		return chamado;
+		
+		
+		
+		
 	}
 	
+	
+	
+		
 }

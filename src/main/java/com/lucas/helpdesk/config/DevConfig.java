@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.lucas.helpdesk.service.DBService;
 
+
 @Configuration
 @Profile("dev")
 public class DevConfig {
@@ -17,6 +18,7 @@ public class DevConfig {
 	
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String value;
+	
 	
 	@Bean
 	public boolean instanciaDB() {
